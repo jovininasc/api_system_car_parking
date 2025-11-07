@@ -2,6 +2,8 @@ package com.systemcars.api.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -14,6 +16,8 @@ public class User {
 
     private String nome;
     private String email;
+
+    @JsonIgnore
     private String senha;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)

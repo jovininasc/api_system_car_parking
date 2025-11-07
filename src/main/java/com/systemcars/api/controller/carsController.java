@@ -27,7 +27,7 @@ public class carsController {
         return carService.getAllCars();
     }
 
-    @GetMapping("/user/{userId}")
+    @GetMapping("/user")
     public ResponseEntity<List<Car>> getCarsByUser(@PathVariable Long userId) {
         List<Car> cars = carService.getCarsByUserId(userId);
         if (cars == null || cars.isEmpty()) {
@@ -36,4 +36,3 @@ public class carsController {
         return ResponseEntity.ok(cars);
     }
 }
-// ...existing code...

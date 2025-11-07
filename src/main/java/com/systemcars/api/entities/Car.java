@@ -1,6 +1,6 @@
 package com.systemcars.api.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 
@@ -16,7 +16,7 @@ public class Car {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-     @JsonIgnoreProperties({"cars","senha"})
+    @JsonIgnore
     private User user;
 
     // Getters e Setters

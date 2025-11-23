@@ -24,7 +24,6 @@ public class userController {
         return userRepository.findAll();
     }
 
-
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserWithCars(@PathVariable Long id) {
         Optional<User> userOpt = userRepository.findById(id);
@@ -33,7 +32,26 @@ public class userController {
             return ResponseEntity.notFound().build();
         }
 
-        // O JPA carrega a lista de carros automaticamente (Lazy ou Eager depende do mapeamento)
         return ResponseEntity.ok(userOpt.get());
     }
+
+    @PostMapping
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        User savedUser = userRepository.save(user);
+        return ResponseEntity.ok(savedUser);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
+        return userRepository.findById(id)
+                .map(user -> {
+                    user.setNome(updatedUser.getNome());
+                    user.setEmail(updatedUser.getEmail());
+                    user.setSenha(updatedUser.getSenha());
+                    User saved = userRepository.save(user);
+                    return ResponseEntity.ok(saved);
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
+
 }

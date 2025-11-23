@@ -22,4 +22,13 @@ public class CarService {
     public List<Car> getCarsByUserId(Long userId) {
         return carRepository.findByUserId(userId);
     }
+
+    public Car createCar(Car car) {
+        return carRepository.save(car);
+    }
+
+    public Car updateCar(Car car) {
+        return carRepository.save(car);
+    }
+
 }

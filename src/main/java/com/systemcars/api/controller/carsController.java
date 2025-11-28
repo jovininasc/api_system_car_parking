@@ -92,4 +92,16 @@ public class carsController {
 
         return ResponseEntity.ok(savedCar);
     }
+
+    //=============================== deleta um carro específico ======================
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCar(@PathVariable Long id) {
+        if (!carRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        carRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 }
